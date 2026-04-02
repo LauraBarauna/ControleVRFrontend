@@ -10,15 +10,23 @@
 
       <div class="flex flex-col gap-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <p-floatLabel>
-            <input pInputText id="firstName" formControlName="firstName" class="w-full" />
-            <label for="firstName">Nome</label>
-          </p-floatLabel>
 
-          <p-floatLabel>
-            <input pInputText id="lastName" formControlName="lastName" class="w-full" />
-            <label for="lastName">Sobrenome</label>
-          </p-floatLabel>
+          <div class="flex flex-col">
+            <p-floatLabel>
+              <input pInputText id="firstName" formControlName="firstName" class="w-full" />
+              <label for="firstName">Nome</label>
+            </p-floatLabel>
+            <app-field-errors [control]="firstName"></app-field-errors>
+          </div>
+
+          <div class="flex flex-col">
+            <p-floatLabel>
+              <input pInputText id="lastName" formControlName="lastName" class="w-full" />
+              <label for="lastName">Sobrenome</label>
+            </p-floatLabel>
+            <app-field-errors [control]="lastName"></app-field-errors>
+          </div>
+
         </div>
       </div>
 
@@ -31,26 +39,31 @@
       </div>
 
       <div class="flex flex-col gap-6">
-        <p-floatLabel>
-          <input pInputText id="username" formControlName="username" class="w-full" />
-          <label for="username">Nome de Usuário</label>
-        </p-floatLabel>
 
-        <p-floatLabel>
-          <p-password
-            id="password"
-            formControlName="password"
-            [toggleMask]="true"
-            [feedback]="false"
-            promptLabel="Escolha uma senha"
-            weakLabel="Fraca"
-            mediumLabel="Média"
-            strongLabel="Forte"
-            inputStyleClass="w-full"
-            fluid>
-          </p-password>
-          <label for="password">Senha</label>
-        </p-floatLabel>
+        <div class="flex flex-col">
+          <p-floatLabel>
+            <input pInputText id="username" formControlName="username" class="w-full" />
+            <label for="username">Nome de Usuário</label>
+          </p-floatLabel>
+          <app-field-errors [control]="username"></app-field-errors>
+        </div>
+
+        <div class="flex flex-col">
+          <p-floatLabel>
+            <p-password
+              id="password"
+              formControlName="password"
+              [toggleMask]="true"
+              [feedback]="false"
+              inputStyleClass="w-full"
+              styleClass="w-full"
+              fluid>
+            </p-password>
+            <label for="password">Senha</label>
+          </p-floatLabel>
+          <app-field-errors [control]="password"></app-field-errors>
+        </div>
+
       </div>
 
       <p-button

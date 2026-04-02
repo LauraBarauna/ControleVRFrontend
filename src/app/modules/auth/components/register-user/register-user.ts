@@ -9,6 +9,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import {FormValidatorUtils} from '../../../../shared/utils/form-validator.utils';
 import {UserRegisterService} from '../../services/user-register.service';
 import {UserModel} from '../../models/user.model';
+import {FieldErrors} from '../../../../shared/components/field-errors/field-errors';
 
 @Component({
   selector: 'app-register-user',
@@ -20,7 +21,8 @@ import {UserModel} from '../../models/user.model';
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    FloatLabelModule
+    FloatLabelModule,
+    FieldErrors
   ],
   providers: [UserRegisterService]
 })
