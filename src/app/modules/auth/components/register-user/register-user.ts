@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControlName, FormControl} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +11,10 @@ import {UserRegisterService} from '../../services/user-register.service';
 import {UserModel} from '../../models/user.model';
 import {FieldErrors} from '../../../../shared/components/field-errors/field-errors';
 
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.html',
@@ -22,12 +26,16 @@ import {FieldErrors} from '../../../../shared/components/field-errors/field-erro
     PasswordModule,
     ButtonModule,
     FloatLabelModule,
-    FieldErrors
+    FieldErrors,
+    MessageModule,
+    ToastModule
   ],
-  providers: [UserRegisterService]
+  providers: [UserRegisterService, MessageService]
 })
 export class RegisterUser implements OnInit {
   registerForm!: FormGroup;
+
+  private messageService = inject(MessageService);
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +66,9 @@ export class RegisterUser implements OnInit {
         error: err => console.error('Failed to create user: ', err),
       })
     }
+
+    this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ajuste os erros do formulário.', life: 3000 });
+    this.registerForm.markAllAsTouched();
   }
 
   public get firstName(): FormControl {
