@@ -1,1 +1,66 @@
-<button>oi</button>
+<div class="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+  <div class="w-full max-w-md bg-white p-6 md:p-8 rounded-xl shadow-lg">
+
+    <header class="mb-8 text-center">
+      <h2 class="text-2xl font-bold text-gray-800">Crie sua conta</h2>
+      <p class="text-sm text-gray-500">Preencha os campos abaixo para começar</p>
+    </header>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+
+      <div class="flex flex-col gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <p-floatLabel>
+            <input pInputText id="firstName" formControlName="firstName" class="w-full" />
+            <label for="firstName">Nome</label>
+          </p-floatLabel>
+
+          <p-floatLabel>
+            <input pInputText id="lastName" formControlName="lastName" class="w-full" />
+            <label for="lastName">Sobrenome</label>
+          </p-floatLabel>
+        </div>
+      </div>
+
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-gray-200"></div>
+        <span class="flex-shrink mx-4 text-gray-400 text-xs uppercase tracking-widest font-semibold">
+          Segurança
+        </span>
+        <div class="flex-grow border-t border-gray-200"></div>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <p-floatLabel>
+          <input pInputText id="username" formControlName="username" class="w-full" />
+          <label for="username">Nome de Usuário</label>
+        </p-floatLabel>
+
+        <p-floatLabel>
+          <p-password
+            id="password"
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="false"
+            promptLabel="Escolha uma senha"
+            weakLabel="Fraca"
+            mediumLabel="Média"
+            strongLabel="Forte"
+            inputStyleClass="w-full"
+            fluid>
+          </p-password>
+          <label for="password">Senha</label>
+        </p-floatLabel>
+      </div>
+
+      <p-button
+        label="Finalizar Cadastro"
+        type="submit"
+        [disabled]="registerForm.invalid"
+        styleClass="w-full mt-4"
+        severity="primary">
+      </p-button>
+
+    </form>
+  </div>
+</div>
