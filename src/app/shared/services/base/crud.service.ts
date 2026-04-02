@@ -14,9 +14,9 @@ export abstract class CrusService<TResume> extends QueryService<TResume>{
   public save<T>(entity: any, id?: number | string): Observable<T> {
     const url = this.url;
     if (!!id) {
-      return this.http.post<T>(url, entity);
+      return this.http.put<T>(url, entity);
     }
-    return this.http.put<T>(url, entity);
+    return this.http.post<T>(url, entity);
   }
 
 }
