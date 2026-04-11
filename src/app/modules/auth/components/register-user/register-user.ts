@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import {FormValidatorUtils} from '../../../../shared/utils/form-validator.utils';
 import {UserRegisterService} from '../../services/user-register.service';
-import {UserModel} from '../../models/user.model';
+import {UserModel} from '../../../../shared/models/user.model';
 import {FieldErrors} from '../../../../shared/components/field-errors/field-errors';
 
 import { MessageModule } from 'primeng/message';
