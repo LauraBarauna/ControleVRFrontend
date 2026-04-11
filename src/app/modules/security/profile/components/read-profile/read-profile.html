@@ -1,1 +1,85 @@
-<p>read-profile works!</p>
+<div class="p-4 md:p-10 min-h-screen bg-gray-50">
+
+  <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+    <div>
+      <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Perfil</h1>
+      <p class="text-gray-500 mt-1">Visualize os detalhes da conta.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <p-button
+        label="Editar Perfil"
+        icon="pi pi-pencil"
+        severity="primary"
+        styleClass="p-button-raised shadow-md px-5 py-2.5">
+      </p-button>
+      <p-button
+        icon="pi pi-arrow-left"
+        severity="secondary"
+        [text]="true"
+        styleClass="p-button-rounded">
+      </p-button>
+    </div>
+  </header>
+
+  <main class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+    <div class="xl:col-span-1">
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 text-center">
+        <div class="relative inline-block mb-4">
+          <p-avatar
+            label="{{ user.firstName[0] }}{{ user.lastName[0] }}"
+            size="xlarge"
+            shape="circle"
+            styleClass="w-32 h-32 text-3xl font-bold bg-indigo-50 text-indigo-600 border-4 border-white ring-2 ring-indigo-100 shadow-inner">
+          </p-avatar>
+          <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-900">{{ user.firstName }} {{ user.lastName }}</h2>
+
+        <div class="flex flex-col items-center gap-2 mt-3">
+          <span class="text-gray-500 text-sm font-medium flex items-center gap-1">
+            <i class="pi pi-at text-xs"></i>@{{ user.username }}
+          </span>
+          <p-tag
+            [value]="user.role"
+            severity="info"
+            class="bg-indigo-50 text-indigo-700 border border-indigo-100 px-3 py-1 font-semibold uppercase text-[10px] tracking-widest">
+          </p-tag>
+        </div>
+      </div>
+    </div>
+
+    <div class="xl:col-span-2">
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="border-b border-gray-100 bg-gray-50/50 px-8 py-4">
+          <h3 class="font-bold text-gray-800">Informações do Registro</h3>
+        </div>
+
+        <div class="p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Primeiro Nome</label>
+              <div class="flex items-center gap-2 text-gray-700 py-1">
+                <i class="pi pi-user text-gray-300"></i>
+                <span class="text-lg font-medium">{{ user.firstName }}</span>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Último Nome</label>
+              <div class="flex items-center gap-2 text-gray-700 py-1">
+                <i class="pi pi-user text-gray-300"></i>
+                <span class="text-lg font-medium">{{ user.lastName }}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
