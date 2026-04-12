@@ -8,16 +8,16 @@
 
     <div class="flex items-center gap-3">
       <p-button
-        label="Editar Perfil"
-        icon="pi pi-pencil"
-        severity="primary"
-        styleClass="p-button-raised shadow-md px-5 py-2.5">
-      </p-button>
-      <p-button
         icon="pi pi-arrow-left"
         severity="secondary"
         [text]="true"
         styleClass="p-button-rounded">
+      </p-button>
+      <p-button
+        label="Editar Perfil"
+        icon="pi pi-pencil"
+        severity="primary"
+        styleClass="p-button-raised shadow-md px-5 py-2.5">
       </p-button>
     </div>
   </header>
@@ -31,7 +31,7 @@
             label="{{ user.firstName[0] }}{{ user.lastName[0] }}"
             size="xlarge"
             shape="circle"
-            styleClass="w-32 h-32 text-3xl font-bold bg-indigo-50 text-indigo-600 border-4 border-white ring-2 ring-indigo-100 shadow-inner">
+            class="w-32 h-32 text-3xl font-bold bg-indigo-50 text-indigo-600 border-4 border-white ring-2 ring-indigo-100 shadow-inner">
           </p-avatar>
           <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
         </div>
@@ -40,7 +40,6 @@
 
         <div class="flex flex-col items-center gap-2 mt-3">
           <span class="text-gray-500 text-sm font-medium flex items-center gap-1">
-            <i class="pi pi-at text-xs"></i>
             &#64;{{  user.username }}
           </span>
           <p-tag
@@ -64,7 +63,6 @@
             <div class="space-y-1">
               <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Primeiro Nome</label>
               <div class="flex items-center gap-2 text-gray-700 py-1">
-                <i class="pi pi-user text-gray-300"></i>
                 <span class="text-lg font-medium">{{ user.firstName }}</span>
               </div>
             </div>
@@ -72,7 +70,6 @@
             <div class="space-y-1">
               <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Último Nome</label>
               <div class="flex items-center gap-2 text-gray-700 py-1">
-                <i class="pi pi-user text-gray-300"></i>
                 <span class="text-lg font-medium">{{ user.lastName }}</span>
               </div>
             </div>
