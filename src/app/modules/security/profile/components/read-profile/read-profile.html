@@ -83,4 +83,14 @@
     </main>
 
 </div>
+} @else {
+  <app-empty-state
+    title="Usuário não encontrado"
+    message="Não conseguimos localizar as informações deste perfil no sistema."
+    icon="pi-user-minus"
+    iconColor="text-red-500"
+    iconBgColor="bg-red-50"
+    buttonLabel="Voltar para Listagem">
+
+  </app-empty-state>
 }

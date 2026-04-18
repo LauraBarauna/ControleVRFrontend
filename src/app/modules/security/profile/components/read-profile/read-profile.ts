@@ -7,6 +7,7 @@ import { CardModule } from 'primeng/card';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { UserModel } from '../../../../../shared/models/user.model';
+import { EmptyState } from '../../../../../shared/components/empty-state/empty-state';
 
 export const roles = {
   ROLE_USER: 'Usuário',
@@ -15,10 +16,10 @@ export const roles = {
 
 @Component({
   selector: 'app-read-profile',
-  imports: [TagModule, DividerModule, ButtonModule, AvatarModule, CardModule],
+  imports: [TagModule, DividerModule, ButtonModule, AvatarModule, CardModule, EmptyState],
   templateUrl: './read-profile.html',
   styleUrl: './read-profile.css',
-  providers: [ProfileService]
+  providers: [ProfileService],
 })
 export class ReadProfile implements OnInit {
   user!: UserModel;
@@ -42,8 +43,8 @@ export class ReadProfile implements OnInit {
             role: roles[res.role as keyof typeof roles],
           };
           this.crf.detectChanges();
-        }
-      })
+        },
+      });
     }
   }
 }
