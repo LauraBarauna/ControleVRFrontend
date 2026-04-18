@@ -2,21 +2,24 @@ import {QueryService} from './query.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-export abstract class CrusService<TResume> extends QueryService<TResume>{
-
+export abstract class crudService<TResume> extends QueryService<TResume> {
   protected constructor(
     http: HttpClient,
-    public baseUrl: string
+    public baseUrl: string,
   ) {
     super(http, baseUrl);
   }
 
-  public save<T>(entity: any, id?: number | string): Observable<T> {
+  public save(entity: any, id?: number | string): Observable<TResume> {
     const url = this.url;
     if (!!id) {
-      return this.http.put<T>(url, entity);
+      return this.http.put<TResume>(url, entity);
     }
-    return this.http.post<T>(url, entity);
+    return this.http.post<TResume>(url, entity);
   }
 
+  public read(id: number | string): Observable<TResume> {
+    const url = `${this.url}/${id}`;
+    return this.http.get<TResume>(url);
+  }
 }
