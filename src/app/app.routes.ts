@@ -11,6 +11,10 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./modules/security/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./modules/users/users.module').then(m => m.ProfileModule)
       }
     ]
   }
