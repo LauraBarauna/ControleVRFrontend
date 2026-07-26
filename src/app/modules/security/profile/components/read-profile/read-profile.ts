@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { UserModel } from '../../../../../shared/models/user.model';
 import { EmptyState } from '../../../../../shared/components/empty-state/empty-state';
+import { Location } from '@angular/common';
 
 export const roles = {
   ROLE_USER: 'Usuário',
@@ -28,23 +29,21 @@ export class ReadProfile implements OnInit {
     private route: ActivatedRoute,
     private service: ProfileService,
     private crf: ChangeDetectorRef,
+    private location: Location
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.service.read(id).subscribe({
-        next: (res) => {
-          this.user = {
-            id: res.id,
-            firstName: res.firstName,
-            lastName: res.lastName,
-            username: res.username,
-            role: roles[res.role as keyof typeof roles],
-          };
-          this.crf.detectChanges();
-        },
-      });
+    const user = this.route.snapshot.data['user'];
+
+    if (user) {
+      user.role = roles[user.role as keyof typeof roles];
+      this.user = user;
     }
+
+
+  }
+
+  back() {
+    this.location.back();
   }
 }

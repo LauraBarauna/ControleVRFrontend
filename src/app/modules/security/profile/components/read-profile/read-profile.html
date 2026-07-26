@@ -12,7 +12,8 @@
         icon="pi pi-arrow-left"
         severity="secondary"
         [text]="true"
-        styleClass="p-button-rounded">
+        styleClass="p-button-rounded"
+        (onClick)="back()">
       </p-button>
       <p-button
         label="Editar Perfil"
@@ -90,7 +91,8 @@
     icon="pi-user-minus"
     iconColor="text-red-500"
     iconBgColor="bg-red-50"
-    buttonLabel="Voltar para Listagem">
+    buttonLabel="Voltar para Listagem"
+    (onAction)="back()">
 
   </app-empty-state>
 }

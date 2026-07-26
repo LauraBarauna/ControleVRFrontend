@@ -7,12 +7,12 @@ import { roles } from '../../read-profile/read-profile';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { ProfileService } from '../../../services/profile.service';
-import { FilterMatchMode } from 'primeng/api';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-list-users',
-  imports: [TableModule, CommonModule, TagModule, ButtonModule],
+  imports: [TableModule, CommonModule, TagModule, ButtonModule, RouterLink],
   templateUrl: './list-users.html',
   styleUrl: './list-users.css',
 })
