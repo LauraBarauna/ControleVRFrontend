@@ -1,0 +1,77 @@
+<div class="p-6 max-w-7xl mx-auto space-y-6">
+
+  <!-- Cabeçalho da Página -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Gerenciamento de Usuários</h1>
+      <p class="text-sm text-gray-500 mt-1">Visualize, filtre e gerencie os acessos do sistema.</p>
+    </div>
+  </div>
+
+  <!-- Card Principal da Tabela -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+
+    <!-- TABELA (Sua tabela original sem nenhuma alteração) -->
+    <p-table
+      [value]="users"
+      [paginator]="true"
+      [rows]="5"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      paginatorDropdownAppendTo="body">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="firstName" style="width:25%">
+            Nome
+            <p-sortIcon field="firstName"/>
+          </th>
+          <th pSortableColumn="username" style="width:25%">
+            Usuário
+            <p-sortIcon field="username"/>
+          </th>
+          <th style="width:25%" pSortableColumn="role">
+            Role (Perfil)
+            <p-sortIcon field="role"/>
+          </th>
+          <th class="flex items-center justify-center gap-1">
+            Ações
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{ user.firstName }}</td>
+          <td>&#64;{{ user.username }}</td>
+          <td>
+            <p-tag
+              [value]="user.role"
+              severity="info"
+              class="bg-indigo-50 text-indigo-700 border border-indigo-100 px-3 py-1 font-semibold uppercase text-[10px] tracking-widest">
+            </p-tag>
+          </td>
+          <td class="flex items-center justify-center gap-1">
+            <div >
+              <p-button
+                icon="pi pi-eye"
+                [rounded]="true"
+                severity="secondary"
+                [text]="true">
+              </p-button>
+
+              <p-button
+                icon="pi pi-pencil"
+                [rounded]="true"
+                severity="secondary"
+                [text]="true">
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </div>
+</div>
