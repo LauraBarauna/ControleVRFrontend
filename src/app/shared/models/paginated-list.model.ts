@@ -1,11 +1,11 @@
 export class PaginatedListModel<T> {
   total: number;
   pages: number;
-  itens: T[];
+  content: T[];
 
   constructor() {
     this.total = 0;
     this.pages = 1;
-    this.itens = [];
+    this.content = [];
   }
 }

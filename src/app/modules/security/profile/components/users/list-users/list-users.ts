@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { UserModel } from '../../../../../../shared/models/user.model';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { roles } from '../../read-profile/read-profile';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
+import { ProfileService } from '../../../services/profile.service';
 
 
 @Component({
@@ -14,19 +15,28 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './list-users.html',
   styleUrl: './list-users.css',
 })
-export class ListUsers {
-  public users: UserModel[] = [
-    {
-      firstName: 'Laura',
-      lastName: 'Isabela',
-      username: 'la.isa',
-      role: roles['ADMIN_ROLE' as keyof typeof roles],
-    },
-    {
-      firstName: 'Sabrina',
-      lastName: 'Zimmermann',
-      username: 'sab.sz',
-      role: roles['ROLE_USER' as keyof typeof roles],
-    },
-  ];
+export class ListUsers implements OnInit {
+  public users!: UserModel[];
+
+  constructor(
+    private service: ProfileService,
+    private crf: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.service.list().subscribe({
+      next: res => {
+        const users = res.content;
+        users.forEach(user => {
+          user.role = roles[user.role as keyof typeof roles];
+        });
+        this.users = users;
+        this.crf.detectChanges();
+      }
+    })
+  }
 }

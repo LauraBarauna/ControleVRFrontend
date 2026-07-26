@@ -1,6 +1,7 @@
 import {QueryService} from './query.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { PaginatedListModel } from '../../models/paginated-list.model';
 
 export abstract class crudService<TResume> extends QueryService<TResume> {
   protected constructor(
@@ -21,5 +22,10 @@ export abstract class crudService<TResume> extends QueryService<TResume> {
   public read(id: number | string): Observable<TResume> {
     const url = `${this.url}/${id}`;
     return this.http.get<TResume>(url);
+  }
+
+  public list(): Observable<PaginatedListModel<TResume>> {
+    const url = this.url;
+    return this.http.get<PaginatedListModel<TResume>>(url);
   }
 }
