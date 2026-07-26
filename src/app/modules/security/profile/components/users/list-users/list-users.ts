@@ -7,6 +7,7 @@ import { roles } from '../../read-profile/read-profile';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { ProfileService } from '../../../services/profile.service';
+import { FilterMatchMode } from 'primeng/api';
 
 
 @Component({
@@ -29,14 +30,14 @@ export class ListUsers implements OnInit {
 
   loadUsers() {
     this.service.list().subscribe({
-      next: res => {
+      next: (res) => {
         const users = res.content;
-        users.forEach(user => {
+        users.forEach((user) => {
           user.role = roles[user.role as keyof typeof roles];
         });
         this.users = users;
         this.crf.detectChanges();
-      }
-    })
+      },
+    });
   }
 }
