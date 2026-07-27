@@ -15,6 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import {FieldErrors} from '../../../../../shared/components/field-errors/field-errors';
 import {UserEditModel} from '../../models/user-edit.model';
+import { MessageService } from 'primeng/api';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
 
 export const roles = {
   ROLE_USER: 'Usuário',
@@ -35,12 +38,13 @@ export const roles = {
     InputTextModule,
     PasswordModule,
     FieldErrors,
-    RouterLink
+    RouterLink,
+    MessageModule,
+    ToastModule
   ],
 
   templateUrl: './read-profile.html',
-  styleUrl: './read-profile.css',
-  providers: [ProfileService],
+  styleUrl: './read-profile.css'
 })
 export class ReadProfile implements OnInit {
   user!: UserModel;
@@ -53,6 +57,7 @@ export class ReadProfile implements OnInit {
     private router: Router,
     private location: Location,
     private formBuilder: FormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -74,29 +79,42 @@ export class ReadProfile implements OnInit {
     const formValues = this.form.value;
 
     const body: UserEditModel = {};
+    let edit: boolean = false;
 
     if (formValues.password) {
       body.password = formValues.password;
+      edit = true;
     }
 
     if (formValues.firstName !== this.user.firstName) {
       body.firstName = formValues.firstName;
+      edit = true;
     }
 
     if (formValues.lastName !== this.user.lastName) {
       body.lastName = formValues.lastName;
+      edit = true;
     }
 
     if (formValues.username !== this.user.username) {
       body.username = formValues.username;
+      edit = true;
     }
 
-    this.service.save(body, this.user.id).subscribe({
-      next: (res) => {
-        console.log("Atualizado", res);
-        this.router.navigate(['/app//profile/users']);
-      }
-    });
+    if (edit) {
+      this.service.save(body, this.user.id).subscribe({
+        next: (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Usuário editado com sucesso!',
+            life: 1000
+          });
+
+          this.router.navigate(['/app//profile/users']);
+        }
+      });
+    }
   }
 
   createForm() {
