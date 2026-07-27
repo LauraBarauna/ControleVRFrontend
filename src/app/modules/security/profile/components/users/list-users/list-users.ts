@@ -3,7 +3,7 @@ import { TableModule } from 'primeng/table';
 import { UserModel } from '../../../../../../shared/models/user.model';
 import { CommonModule } from '@angular/common';
 
-import { roles } from '../../read-profile/read-profile';
+import { roles } from '../read-user/read-profile';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { ProfileService } from '../../../services/profile.service';

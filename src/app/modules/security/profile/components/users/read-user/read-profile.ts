@@ -5,16 +5,16 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { CardModule } from 'primeng/card';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import { ProfileService } from '../../services/profile.service';
-import { UserModel } from '../../../../../shared/models/user.model';
-import { EmptyState } from '../../../../../shared/components/empty-state/empty-state';
+import { ProfileService } from '../../../services/profile.service';
+import { UserModel } from '../../../../../../shared/models/user.model';
+import { EmptyState } from '../../../../../../shared/components/empty-state/empty-state';
 import { Location } from '@angular/common';
-import {OriginRouteProfile} from '../../models/profile.types';
+import {OriginRouteProfile} from '../../../models/profile.types';
 import {FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import {FieldErrors} from '../../../../../shared/components/field-errors/field-errors';
-import {UserEditModel} from '../../models/user-edit.model';
+import {FieldErrors} from '../../../../../../shared/components/field-errors/field-errors';
+import {UserEditModel} from '../../../models/user-edit.model';
 import { MessageService } from 'primeng/api';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
@@ -26,7 +26,7 @@ export const roles = {
 } as const;
 
 @Component({
-  selector: 'app-read-profile',
+  selector: 'app-read-user',
   imports: [
     TagModule,
     DividerModule,

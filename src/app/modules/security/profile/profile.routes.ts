@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ReadProfile } from './components/read-profile/read-profile';
+import { ReadProfile } from './components/users/read-user/read-profile';
 import { ListUsers } from './components/users/list-users/list-users';
 import { profileResolver } from './resolver/profile.resolver';
 

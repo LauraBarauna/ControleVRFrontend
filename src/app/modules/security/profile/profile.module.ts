@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PROFILE_ROUTES } from './profile.routes';
-import { ReadProfile } from './components/read-profile/read-profile';
+import { ReadProfile } from './components/users/read-user/read-profile';
 import { ProfileService } from './services/profile.service';
 
 @NgModule({
