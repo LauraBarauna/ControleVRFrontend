@@ -1,0 +1,22 @@
+<header class="fixed top-0 left-0 right-0 z-50 w-full bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shadow-sm">
+  <div class="flex items-center gap-3">
+    <p-button
+      icon="pi pi-bars"
+      [text]="true"
+      severity="secondary"
+      styleClass="p-button-rounded"
+      (onClick)="toggle()">
+    </p-button>
+
+    <div class="flex items-center gap-2">
+      <i class="pi pi-credit-card text-indigo-600 text-xl"></i>
+      <span class="font-extrabold text-lg text-gray-800 tracking-tight">Controle VR</span>
+    </div>
+  </div>
+</header>
+
+<p-drawer [(visible)]="visible" header="Navegação">
+  <div class="py-2">
+    <p-panelMenu [model]="menuItems" class="w-full border-none"></p-panelMenu>
+  </div>
+</p-drawer>
