@@ -18,6 +18,7 @@ import {UserEditModel} from '../../models/user-edit.model';
 import { MessageService } from 'primeng/api';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const roles = {
   ROLE_USER: 'Usuário',
@@ -112,6 +113,16 @@ export class ReadProfile implements OnInit {
           });
 
           this.router.navigate(['/app//profile/users']);
+        },
+        error: (err: HttpErrorResponse) => {
+          const errorDetail = err.error?.message || 'Ocorreu um erro ao tentar salvar o usuário.';
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: errorDetail,
+            life: 1000
+          });
         }
       });
     }
