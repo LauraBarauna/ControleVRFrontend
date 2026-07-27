@@ -57,14 +57,15 @@
                 [rounded]="true"
                 severity="secondary"
                 [text]="true"
-                [routerLink]="[user.id]">
+                [routerLink]="['view', user.id]">
               </p-button>
 
               <p-button
                 icon="pi pi-pencil"
                 [rounded]="true"
                 severity="secondary"
-                [text]="true">
+                [text]="true"
+                [routerLink]="['edit', user.id]">
               </p-button>
             </div>
           </td>

@@ -14,7 +14,7 @@ export abstract class crudService<TResume> extends QueryService<TResume> {
   public save(entity: any, id?: number | string): Observable<TResume> {
     const url = this.url;
     if (!!id) {
-      return this.http.put<TResume>(url, entity);
+      return this.http.put<TResume>(`${url}/${id}`, entity);
     }
     return this.http.post<TResume>(url, entity);
   }

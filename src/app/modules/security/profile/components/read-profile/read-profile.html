@@ -4,7 +4,7 @@
   <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
     <div>
       <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Perfil</h1>
-      <p class="text-gray-500 mt-1">Visualize os detalhes da conta.</p>
+      <p class="text-gray-500 mt-1">{{ isView ? 'Visualize os detalhes da conta.' : 'Edite os detalhes da conta.' }}</p>
     </div>
 
     <div class="flex items-center gap-3">
@@ -14,74 +14,129 @@
         [text]="true"
         styleClass="p-button-rounded"
         (onClick)="back()">
+
       </p-button>
-      <p-button
-        label="Editar Perfil"
-        icon="pi pi-pencil"
-        severity="primary"
-        styleClass="p-button-raised shadow-md px-5 py-2.5">
-      </p-button>
+      @if (isEdit) {
+        <p-button
+          label="Restaurar dados originais"
+          icon="pi pi-refresh"
+          severity="secondary"
+          [text]="true"
+          size="small"
+          (onClick)="resetForm()">
+        </p-button>
+
+        <p-button
+          label="Salvar"
+          icon="pi pi-check"
+          severity="primary"
+          styleClass="p-button-raised shadow-md px-5 py-2.5"
+          (onClick)="update()">
+        </p-button>
+      }
+
+      @if (isView) {
+        <p-button
+          label="Editar Perfil"
+          icon="pi pi-pencil"
+          severity="primary"
+          styleClass="p-button-raised shadow-md px-5 py-2.5"
+          [routerLink]="['/app/profile/users/edit', user.id]">
+        </p-button>
+      }
+
     </div>
   </header>
 
-  <main class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+  <form [formGroup]="form">
+    <main class="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
-      <div class="xl:col-span-1">
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 text-center">
-          <div class="relative inline-block mb-4">
-            <p-avatar
-              label="{{ user.firstName[0] }}{{ user.lastName[0] }}"
-              size="xlarge"
-              shape="circle"
-              class="w-32 h-32 text-3xl font-bold bg-indigo-50 text-indigo-600 border-4 border-white ring-2 ring-indigo-100 shadow-inner">
-            </p-avatar>
-            <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
-          </div>
+        <div class="xl:col-span-1">
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 text-center">
+            <div class="relative inline-block mb-4">
+              <p-avatar
+                label="{{avatar}}"
+                size="xlarge"
+                shape="circle"
+                class="w-32 h-32 text-3xl font-bold bg-indigo-50 text-indigo-600 border-4 border-white ring-2 ring-indigo-100 shadow-inner">
+              </p-avatar>
+              <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
+            </div>
 
-          <h2 class="text-xl font-bold text-gray-900">{{ user.firstName }} {{ user.lastName }}</h2>
+            <h2 class="text-xl font-bold text-gray-900">{{ firstName?.value }} {{ lastName?.value }}</h2>
 
-          <div class="flex flex-col items-center gap-2 mt-3">
-          <span class="text-gray-500 text-sm font-medium flex items-center gap-1">
-            &#64;{{  user.username }}
-          </span>
-            <p-tag
-              [value]="user.role"
-              severity="info"
-              class="bg-indigo-50 text-indigo-700 border border-indigo-100 px-3 py-1 font-semibold uppercase text-[10px] tracking-widest">
-            </p-tag>
-          </div>
-        </div>
-      </div>
-
-      <div class="xl:col-span-2">
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-          <div class="border-b border-gray-100 bg-gray-50/50 px-8 py-4">
-            <h3 class="font-bold text-gray-800">Informações do Registro</h3>
-          </div>
-
-          <div class="p-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-              <div class="space-y-1">
-                <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Primeiro Nome</label>
-                <div class="flex items-center gap-2 text-gray-700 py-1">
-                  <span class="text-lg font-medium">{{ user.firstName }}</span>
-                </div>
-              </div>
-
-              <div class="space-y-1">
-                <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Último Nome</label>
-                <div class="flex items-center gap-2 text-gray-700 py-1">
-                  <span class="text-lg font-medium">{{ user.lastName }}</span>
-                </div>
-              </div>
-
+            <div class="flex flex-col items-center gap-2 mt-3">
+            <span class="text-gray-500 text-sm font-medium flex items-center gap-1">
+              &#64;{{  userName?.value }}
+            </span>
+              <p-tag
+                [value]="user.role"
+                severity="info"
+                class="bg-indigo-50 text-indigo-700 border border-indigo-100 px-3 py-1 font-semibold uppercase text-[10px] tracking-widest">
+              </p-tag>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="xl:col-span-2">
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="border-b border-gray-100 bg-gray-50/50 px-8 py-4">
+              <h3 class="font-bold text-gray-800">Informações do Registro</h3>
+            </div>
+
+            <div class="p-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Primeiro Nome</label>
+                  <div class="flex flex-col items-start gap-1 w-full text-gray-700 py-1">
+                    @if (isView) {
+                      <span class="text-lg font-medium">{{ firstName?.value }}</span>
+                    } @else if (isEdit) {
+                      <input type="text" pInputText formControlName="firstName" maxlength="50" />
+                      <app-field-errors [control]="firstName"></app-field-errors>
+                    }
+
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Último Nome</label>
+                  <div class="flex flex-col items-start gap-1 w-full text-gray-700 py-1">
+                    @if (isView) {
+                      <span class="text-lg font-medium">{{ lastName?.value }}</span>
+                    } @else if (isEdit) {
+                      <input type="text" pInputText formControlName="lastName" maxlength="100" />
+                      <app-field-errors [control]="lastName"></app-field-errors>
+                    }
+                  </div>
+                </div>
+
+                @if (isEdit) {
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Nome do Usuário</label>
+                    <div class="flex flex-col items-start gap-1 w-full text-gray-700 py-1">
+                        <input type="text" pInputText formControlName="username" maxlength="80" />
+                        <app-field-errors [control]="userName"></app-field-errors>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Senha</label>
+                    <div class="flex flex-col items-start gap-1 w-full text-gray-700 py-1">
+                      <p-password formControlName="password" [feedback]="false" [toggleMask]="true" [maxlength]="16"/>
+                    </div>
+                    <app-field-errors [control]="password"></app-field-errors>
+                  </div>
+                }
+
+              </div>
+            </div>
+          </div>
+        </div>
 
     </main>
+  </form>
 
 </div>
 } @else {

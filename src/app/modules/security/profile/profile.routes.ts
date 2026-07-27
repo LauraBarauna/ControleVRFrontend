@@ -5,11 +5,24 @@ import { profileResolver } from './resolver/profile.resolver';
 
 export const PROFILE_ROUTES: Routes = [
   {
-    path: 'users/:id',
+    path: 'users/view/:id',
     component: ReadProfile,
     resolve: {
       user: profileResolver,
     },
+    data: {
+      originRoute: 'view'
+    }
+  },
+  {
+    path: 'users/edit/:id',
+    component: ReadProfile,
+    resolve: {
+      user: profileResolver,
+    },
+    data: {
+      originRoute: 'edit'
+    }
   },
   {
     path: 'users',
