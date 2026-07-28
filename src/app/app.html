@@ -1,12 +1,3 @@
-<p-toast></p-toast>
-<div class="min-h-screen flex flex-col bg-gray-50">
+<p-toast position="top-center"></p-toast>
+<router-outlet></router-outlet>
 
-  <!-- Nosso componente de Menu/Header vindo do Shared -->
-  <app-sidebar></app-sidebar>
-
-  <!-- Área onde as telas das rotas são renderizadas -->
-  <main class="flex-1 p-4 md:p-8">
-    <router-outlet></router-outlet>
-  </main>
-
-</div>

@@ -30,16 +30,17 @@ import { MessageService } from 'primeng/api';
     MessageModule,
     ToastModule
   ],
-  providers: [UserRegisterService, MessageService]
+  providers: [UserRegisterService]
 })
 export class RegisterUser implements OnInit {
   registerForm!: FormGroup;
 
-  private messageService = inject(MessageService);
 
   constructor(
     private fb: FormBuilder,
-    private service: UserRegisterService) {}
+    private service: UserRegisterService,
+    private messageService: MessageService
+    ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
